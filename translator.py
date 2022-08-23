@@ -33,7 +33,7 @@ text = input(
 
 while True:
     try:
-        text += input()
+        text += input().strip()
     except KeyboardInterrupt:
         break
 
@@ -42,12 +42,12 @@ original_text = text
 print(f"{Fore.LIGHTGREEN_EX}\n[*] Ok! Translating...")
 
 translator = GoogleTranslator()
-
 text = translator.translate(text)
 
 last = ENGLISH
 for language in selected_langs:
-    text = GoogleTranslator(source=last, target=language).translate(text)
+    translator.source = last
+    translator.target = language
     last = language
 
 text = GoogleTranslator(source=last, target=ENGLISH).translate(text)
